@@ -1,0 +1,99 @@
+import static java.lang.String.*;
+
+public class one {
+    public static void main(String[] args) {
+
+
+        String c = change_register("рУматРОн");
+        System.out.println(c);
+        int[] Arrays = {77, 85, 43, 123, 5, 775};
+        Sort(Arrays);
+        int z = SumNumber(345);
+        System.out.println(z);
+        findCommon(6,11,8,12);
+        System.out.println(ToHex(11));
+    }
+
+    public static String change_register(String st) {
+
+        char[] chars = st.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            if (Character.isUpperCase(c)) {
+                chars[i] = Character.toLowerCase(c);
+            } else if (Character.isLowerCase(c)) {
+                chars[i] = Character.toUpperCase(c);
+            }
+        }
+        return new String(chars);
+    }
+
+    public static void Sort(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int least = i;
+            int min = array[i];
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < min) {
+                    least = j;
+                    min = array[j];
+                }
+            }
+            array[least] = array[i];
+            array[i] = min;
+            System.out.println(array[i]);
+        }
+
+    }
+
+    public static int SumNumber(int i) {
+        int sum=0;
+        while (i != 0) {
+            sum += (i % 10);
+            i/=10;
+        }
+
+        return sum;
+
+    }
+    public static void findCommon(int firstStart, int firstEnd, int secondStart, int secondEnd) {
+        int tmp;
+        if (firstStart > firstEnd) {
+            tmp = firstStart;
+            firstStart = firstEnd;
+            firstEnd = tmp;
+        }
+        if (secondStart > firstEnd) {
+            tmp = secondStart;
+            secondStart = secondEnd;
+            secondEnd = tmp;
+        }
+
+        if (firstStart > secondStart) {
+            tmp = firstStart;
+            firstStart = secondStart;
+            secondStart = tmp;
+
+            tmp = firstEnd;
+            firstEnd = secondEnd;
+            secondEnd = tmp;
+        }
+        for(int number = secondStart; number <= firstEnd;++number){
+            System.out.print(number + " ");
+        }
+    }
+    public static String ToHex(int num)
+    {
+        StringBuilder result=new StringBuilder("=");
+        char alphabet[]={'1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        while(num!=0)
+        {
+            if(num%16>9)
+                result.append(alphabet[(num%16)-1]);
+            else
+                result.append(num%16);
+            num/=16;
+        }
+        result.append("x0=");
+        return result.reverse().toString();
+    }
+}
